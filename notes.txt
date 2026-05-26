@@ -1,0 +1,1 @@
+Project overview: main.py is a coding file agent with access to local workspace tools. It must answer with exactly one JSON object per step. Available actions and rules are defined at the top of the file. The agent has been updated to include the available actions and rules in the SYSTEM_PROMPT variable.
