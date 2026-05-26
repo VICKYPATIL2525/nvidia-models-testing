@@ -12,10 +12,8 @@ SYSTEM_PROMPT = """You are a helpful and knowledgeable assistant.
 Answer any question clearly, concisely, and accurately.
 If you don't know the answer, say so honestly."""
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", SYSTEM_PROMPT),
-    MessagesPlaceholder(variable_name="history"),
-    ("human", "{question}"),
+prompt = ChatPromptTemplate.from_messages([("system", SYSTEM_PROMPT),
+        MessagesPlaceholder(variable_name="history"),("human", "{question}"),
 ])
 
 
