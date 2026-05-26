@@ -1,79 +1,119 @@
-# nvidia-models-testing
+<div align="center">
 
-Simple command-line coding chatbot built with LangChain and NVIDIA AI endpoints.
+# NVIDIA CLI Chatbot
 
-## Features
+**A simple terminal-based Q&A chatbot powered by free NVIDIA AI models and LangChain.**
 
-- Uses LangChain chat model wrapper for NVIDIA endpoints
-- Writes full session activity to a JSON log file
-- Reads configuration from environment variables or a .env file
-- Focused on coding question-and-answer use cases
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python)
+![LangChain](https://img.shields.io/badge/LangChain-0.3%2B-green?style=flat-square)
+![NVIDIA](https://img.shields.io/badge/NVIDIA-AI%20Endpoints-76B900?style=flat-square&logo=nvidia)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
-## Project Structure
+</div>
 
-- main.py: chatbot app entrypoint
-- requirements.txt: Python dependencies
-- .env: local secrets and config (not committed)
-- chat_activity.json: generated runtime logs and totals
+---
+
+## Overview
+
+A minimal CLI chatbot that runs in your terminal. Ask any question and get an answer. It remembers the conversation so follow-up questions work naturally. Built with the **free NVIDIA AI Endpoints API** and **LangChain** in a single Python file.
+
+---
+
+## Tech Stack
+
+| Tool | Purpose |
+|---|---|
+| [NVIDIA AI Endpoints](https://build.nvidia.com) | Free hosted LLM API |
+| [LangChain](https://python.langchain.com) | LLM wrapper and message handling |
+| [python-dotenv](https://pypi.org/project/python-dotenv/) | Load API key from `.env` |
+
+---
 
 ## Setup
 
-1. Create and activate a virtual environment.
-2. Install dependencies:
+**1. Get a free NVIDIA API key**
 
-	pip install -r requirements.txt
+Sign up at [build.nvidia.com](https://build.nvidia.com), pick any free model, and copy the API key.
 
-3. Create or update your .env file with:
+**2. Clone and install**
 
-	NVIDIA_API_KEY=your_api_key_here
-	NVIDIA_MODEL=meta/llama-3.1-8b-instruct
-	TEMPERATURE=0.2
+```bash
+git clone https://github.com/your-username/nvidia-models-testing.git
+cd nvidia-models-testing
+
+python -m venv myenv
+myenv\Scripts\activate        # Windows
+# source myenv/bin/activate   # Mac / Linux
+
+pip install -r requirements.txt
+```
+
+**3. Create a `.env` file**
+
+```env
+NVIDIA_API_KEY=nvapi-xxxxxxxxxxxxxxxxxxxx
+NVIDIA_MODEL=meta/llama-3.1-8b-instruct
+TEMPERATURE=0.2
+```
+
+> Never commit `.env` to git — it is already in `.gitignore`.
+
+---
 
 ## Run
 
+```bash
 python main.py
+```
 
-Then ask coding questions directly in the terminal.
-Type exit or quit to stop.
+---
 
-## Agent Mode (Read/Edit/Save Files)
+## Example
 
-You can run file-editing tasks with:
+```
+Chatbot ready. Type 'exit' to quit.
 
-/agent <your task>
+you> what is a large language model?
+bot> A large language model (LLM) is a type of AI trained on massive amounts
+     of text data to understand and generate human language ...
 
-Examples:
+you> give me a simple python example of a class
+bot> Sure! Here's a simple example ...
 
-- /agent list all python files in this project
-- /agent read main.py and explain what to improve
-- /agent create utils.py with a function to validate email
-- /agent replace temperature default from 0.2 to 0.1 in main.py
+you> exit
+Bye!
+```
 
-Supported file actions in workspace:
+---
 
-- List files
-- Read file ranges
-- Write files
-- Replace text in files
+## Configuration
 
-Safety:
+| Variable | Default | Description |
+|---|---|---|
+| `NVIDIA_API_KEY` | *(required)* | Your free NVIDIA API key |
+| `NVIDIA_MODEL` | `meta/llama-3.1-8b-instruct` | Model to use |
+| `TEMPERATURE` | `0.2` | Creativity — 0.0 focused, 1.0 creative |
 
-- Agent actions are restricted to the current workspace directory.
+### Available free models
 
-## Logging
+| Model ID | Best For |
+|---|---|
+| `meta/llama-3.1-8b-instruct` | General Q&A, fast (default) |
+| `meta/llama-3.1-70b-instruct` | Complex reasoning |
+| `mistralai/mistral-7b-instruct-v0.3` | Concise responses |
+| `microsoft/phi-3-mini-128k-instruct` | Long context |
 
-The app creates and updates chat_activity.json automatically.
+Browse all free models at [build.nvidia.com/explore/reasoning](https://build.nvidia.com/explore/reasoning).
 
-It tracks:
+---
 
-- Per-turn input and output text
-- Number of messages
-- Character counts for input and output
-- Estimated input and output tokens
-- Reported token usage from the model (if returned)
-- Session events like startup, errors, and shutdown
+## Project Structure
 
-## Notes
-
-- Do not hardcode API keys in source code.
-- You can change the model by updating NVIDIA_MODEL in .env.
+```
+nvidia-models-testing/
+├── main.py           # entire chatbot in one file
+├── requirements.txt  # dependencies
+├── .env              # your API key (git-ignored)
+├── .gitignore
+└── README.md
+```
