@@ -105,6 +105,8 @@ Bye!
 
 Browse all free models at [build.nvidia.com/explore/reasoning](https://build.nvidia.com/explore/reasoning).
 
+If you get a `404 Not Found` error, the selected model may be unavailable or deprecated for your account/region. Try another free model from the list above.
+
 ---
 
 ## Project Structure
