@@ -27,7 +27,7 @@ def main():
         sys.exit(1)#sys.exit(1) is used to exit the program with a status code of 1, which indicates that an error occurred.
 # initialize the ChatNVIDIA model with the specified model name and temperature. The model name can be set using the NVIDIA_MODEL environment variable, and the temperature can be set using the TEMPERATURE environment variable. If these variables are not set, default values will be used.
     llm = ChatNVIDIA(
-        model=os.getenv("NVIDIA_MODEL", "deepseek-ai/deepseek-r1"),# we are using the deepseek-r1 model from NVIDIA, which is a powerful language model designed for various natural language processing tasks.
+        model=os.getenv("NVIDIA_MODEL", "meta/llama-3.1-8b-instruct"),
         temperature=float(os.getenv("TEMPERATURE", "0.2")),
     )
 
